@@ -1,8 +1,19 @@
 import React from "react";
-import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import Box from "@material-ui/core";
+import { globalTheme } from "../theme/Theme";
 import GlobalStyle from "../theme/GlobalStyle";
+import Select from "../components/Common/Select";
+import { JssProvider } from "react-jss";
+import { create } from "jss";
+import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
+import MainContainer from "../components/Layout/MainContainer";
+
+const generateClassName = createGenerateClassName();
+const jss = create({
+  ...jssPreset(),
+  insertionPoint: document.getElementById("jss-insertion-point")
+});
 
 const theme = createMuiTheme({
   palette: {
@@ -10,21 +21,18 @@ const theme = createMuiTheme({
   }
 });
 
-const Root = styled.div`
-  max-width: 1200px;
-  width: 1200px;
-  min-height: 90vh;
-  margin: 0 auto;
-  background: #272c33;
-  color: white;
-`;
-
 const App = () => {
   return (
-    <MuiThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Root></Root>
-    </MuiThemeProvider>
+    <JssProvider jss={jss} generateClassName={generateClassName}>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={globalTheme}>
+          <GlobalStyle />
+          <MainContainer>
+            <Select />
+          </MainContainer>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </JssProvider>
   );
 };
 
