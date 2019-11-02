@@ -5,10 +5,12 @@ import { Container, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
+    minHeight: "80vh"
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
+    height: "100%",
     backgroundColor: "#383f48"
   }
 }));

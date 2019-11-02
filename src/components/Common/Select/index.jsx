@@ -23,7 +23,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     height: 250,
-    minWidth: 290
+    maxWidth: 290,
+
+    margin: "0 auto"
   },
   input: {
     display: "flex",
@@ -209,6 +211,7 @@ Placeholder.propTypes = {
 };
 
 const SingleValue = props => {
+  const classes = useStyles();
   return (
     <Chip
       avatar={<Avatar alt={props.data.label} src={props.data.image} />}
