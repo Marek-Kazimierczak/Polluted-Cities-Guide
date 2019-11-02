@@ -1,4 +1,4 @@
-export const theme = {
+export const globalTheme = {
   primary: "#00a5da",
   primaryDark: "#0b4e97",
   secondary: "#41af89",
@@ -8,10 +8,15 @@ export const theme = {
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightBold: 700,
-  h1: "9.6rem",
-  h2: "6rem",
-  h3: "4.8rem",
-  subtitle: "1.6rem",
-  body: "1.4rem",
-  caption: "1.2rem"
+  h1: "6rem",
+  h2: "3.75rem",
+  h3: "3rem",
+  subtitle: "1rem",
+  body: "0.875rem",
+  caption: "0.75rem",
+  xs: 0,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  xl: 1920
 };
