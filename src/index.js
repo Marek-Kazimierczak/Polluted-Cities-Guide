@@ -7,8 +7,8 @@ import { applyMiddleware, createStore } from "redux";
 import reduxThunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./views/App";
-import * as serviceWorker from "./serviceWorker";
 import reducer from "./reducers";
+import * as serviceWorker from "./serviceWorker";
 
 const createStoreWithMiddleware = composeWithDevTools(
   applyMiddleware(reduxThunk)

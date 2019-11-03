@@ -18,10 +18,12 @@ import { getCities, getCitiesImages } from "../../../actions";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: 250,
     maxWidth: 290,
+    margin: "40px auto",
 
-    margin: "0 auto"
+    [theme.breakpoints.down("sm")]: {
+      margin: "40px auto 0"
+    }
   },
   input: {
     display: "flex",
@@ -38,7 +40,10 @@ const useStyles = makeStyles(theme => ({
   chip: {
     margin: theme.spacing(0.5, 0.25),
     width: "50%",
-    borderRadius: 0
+    borderRadius: 0,
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#424242"
+    }
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -47,6 +52,10 @@ const useStyles = makeStyles(theme => ({
         : theme.palette.grey[700],
       0.08
     )
+  },
+  avatar: {
+    width: 24,
+    height: 24
   },
   noOptionsMessage: {
     padding: theme.spacing(1, 2)
@@ -65,7 +74,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
     marginTop: theme.spacing(1),
     left: 0,
-    right: 0
+    right: 0,
+    boxShadow: "0px 25px 25px 25px rgba(0,0,0,0.75)",
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#424242"
+    }
   },
   divider: {
     height: theme.spacing(2)
@@ -121,7 +134,7 @@ Control.propTypes = {
     PropTypes.shape({
       current: PropTypes.any.isRequired
     })
-  ]).isRequired,
+  ]),
   selectProps: PropTypes.object.isRequired
 };
 
@@ -145,19 +158,19 @@ Option.propTypes = {
   children: PropTypes.node,
   innerProps: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    key: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onMouseMove: PropTypes.func.isRequired,
     onMouseOver: PropTypes.func.isRequired,
     tabIndex: PropTypes.number.isRequired
-  }).isRequired,
+  }),
   innerRef: PropTypes.oneOfType([
     PropTypes.oneOf([null]),
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any.isRequired
+      current: PropTypes.any
     })
-  ]).isRequired,
+  ]),
   isFocused: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired
 };
@@ -186,7 +199,13 @@ const SingleValue = props => {
   return (
     <Chip
       key={props.label}
-      avatar={<Avatar alt={props.data.label} src={props.data.image} />}
+      avatar={
+        <Avatar
+          className={classes.avatar}
+          alt={props.data.label}
+          src={props.data.image}
+        />
+      }
       tabIndex={-1}
       label={props.children}
       className={classes.chip}
@@ -197,7 +216,7 @@ const SingleValue = props => {
 
 SingleValue.propTypes = {
   children: PropTypes.node,
-  innerProps: PropTypes.any.isRequired,
+  innerProps: PropTypes.any,
   selectProps: PropTypes.object.isRequired
 };
 
