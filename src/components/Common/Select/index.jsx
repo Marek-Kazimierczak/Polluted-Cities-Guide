@@ -53,6 +53,10 @@ const useStyles = makeStyles(theme => ({
       0.08
     )
   },
+  avatar: {
+    width: 24,
+    height: 24
+  },
   noOptionsMessage: {
     padding: theme.spacing(1, 2)
   },
@@ -195,7 +199,13 @@ const SingleValue = props => {
   return (
     <Chip
       key={props.label}
-      avatar={<Avatar alt={props.data.label} src={props.data.image} />}
+      avatar={
+        <Avatar
+          className={classes.avatar}
+          alt={props.data.label}
+          src={props.data.image}
+        />
+      }
       tabIndex={-1}
       label={props.children}
       className={classes.chip}
