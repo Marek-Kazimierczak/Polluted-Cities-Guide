@@ -39,7 +39,6 @@ const ExpansionItem = props => {
   const [description, setDescription] = useState(null);
   const dispatch = useDispatch();
   const details = useSelector(state => state.cityDetails.details);
-  const activeCity = useSelector(state => state.cityDetails.activeCity);
 
   const handleClick = () => {
     dispatch(cityDetails(props.data.label));

@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
     case GET_DETAILS_SUCCESS: {
       return {
         ...state,
-        details: action.payload,
+        details: !action.payload ? "No details available" : action.payload,
         loading: false
       };
     }

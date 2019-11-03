@@ -7,8 +7,8 @@ import Select from "../components/Common/Select";
 import { JssProvider } from "react-jss";
 import { create } from "jss";
 import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
-import MainContainer from "../components/Layout/MainContainer";
-import Accordion from "../components/Common/Accordion";
+import Header from "../components/Layout/Header";
+import Main from "../components/Layout/Main";
 
 const generateClassName = createGenerateClassName();
 const jss = create({
@@ -21,14 +21,9 @@ const theme = createMuiTheme({
     type: "dark"
   },
   overrides: {
-    MuiCardContent: {
-      root: {
-        backgroundColor: "#272c33"
-      }
-    },
     MuiPaper: {
       root: {
-        backgroundColor: "#272c33"
+        backgroundColor: "#383f48"
       }
     }
   }
@@ -40,10 +35,8 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={globalTheme}>
           <GlobalStyle />
-          <MainContainer>
-            <Select />
-            <Accordion />
-          </MainContainer>
+          <Header />
+          <Main />
         </ThemeProvider>
       </MuiThemeProvider>
     </JssProvider>
