@@ -18,10 +18,12 @@ import { getCities, getCitiesImages } from "../../../actions";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: 250,
     maxWidth: 290,
+    margin: "40px auto",
 
-    margin: "0 auto"
+    [theme.breakpoints.down("sm")]: {
+      margin: "40px auto 0"
+    }
   },
   input: {
     display: "flex",
@@ -38,7 +40,10 @@ const useStyles = makeStyles(theme => ({
   chip: {
     margin: theme.spacing(0.5, 0.25),
     width: "50%",
-    borderRadius: 0
+    borderRadius: 0,
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#424242"
+    }
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -65,7 +70,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
     marginTop: theme.spacing(1),
     left: 0,
-    right: 0
+    right: 0,
+    boxShadow: "0px 25px 25px 25px rgba(0,0,0,0.75)",
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "#424242"
+    }
   },
   divider: {
     height: theme.spacing(2)

@@ -26,9 +26,17 @@ const useStyles = makeStyles(theme => ({
     flexBasis: "33.33%",
     flexShrink: 0
   },
+  subHeading: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
+  },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary
+  },
+  text: {
+    lineHeight: "1.5rem;"
   },
   details: {
     backgroundColor: "#303030"
@@ -74,12 +82,12 @@ const ExpansionItem = props => {
       >
         <Avatar alt={label} src={image} className={classes.avatar} />
         <Typography className={classes.heading}>{label}</Typography>
-        <Typography className={classes.secondaryHeading}>
+        <Typography className={classes.subHeading}>
           {measurements.value} {measurements.unit}
         </Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
-        <Typography variant="body2">
+        <Typography className={classes.text} variant="body2">
           {loading ? "loading..." : details}
         </Typography>
       </ExpansionPanelDetails>

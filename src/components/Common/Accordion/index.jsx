@@ -8,7 +8,10 @@ import ExpansionItem from "./ExpansionItem";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    overflow: "hidden"
+    overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "black"
+    }
   }
 }));
 
