@@ -262,11 +262,11 @@ const CountrySelect = () => {
 
   useEffect(() => {
     value && dispatch(getCities(value));
-  }, []);
+  }, [value, dispatch]);
 
   useEffect(() => {
     cities && dispatch(getCitiesImages(cities));
-  }, [cities]);
+  }, [cities, dispatch]);
 
   const selectStyles = {
     input: base => ({

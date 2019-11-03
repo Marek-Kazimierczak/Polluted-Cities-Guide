@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -41,24 +41,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ExpansionItem = props => {
-  const {
-    expanded,
-    setChange,
-    data: { label, name, image, measurements }
-  } = props;
+  const { expanded, setChange, index } = props;
+
   const classes = useStyles();
   const dispatch = useDispatch();
-  const details = useSelector(state => state.cityDetails.details);
   const loading = useSelector(state => state.cityDetails.loading);
-  const [description, setDescription] = useState(null);
+  const label = useSelector(state => state.cities.cities[index]);
+  const thumbnails = useSelector(state => state.cities.images);
+  const details = useSelector(state => state.cityDetails.details);
+  const activeCountryImage = useSelector(state => state.cities.countryImage);
+  const measurements = useSelector(state => state.cities.measurements[index]);
+
+  const name = `panel${index + 1}`;
+  const image =
+    thumbnails[index] !== null ? thumbnails[index] : activeCountryImage;
 
   const handleClick = () => {
     dispatch(cityDetails(label));
   };
-
-  useEffect(() => {
-    setDescription(details);
-  }, [details]);
 
   return (
     <ExpansionPanel
@@ -80,7 +80,7 @@ const ExpansionItem = props => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
         <Typography variant="body2">
-          {loading ? "loading..." : description}
+          {loading ? "loading..." : details}
         </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
