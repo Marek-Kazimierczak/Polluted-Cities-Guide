@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -6,6 +7,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Avatar } from "@material-ui/core";
+import { cityDetails } from "../../../../actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,13 +36,23 @@ const useStyles = makeStyles(theme => ({
 
 const ExpansionItem = props => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [description, setDescription] = useState(null);
+  const dispatch = useDispatch();
+  const details = useSelector(state => state.cityDetails.details);
 
-  const handleChange = (event, isExpanded) => {
-    setExpanded(!expanded);
-  };
+  useEffect(() => {
+    props.expanded && dispatch(cityDetails(props.data.label));
+  }, [props.expanded]);
+
+  useEffect(() => {
+    setDescription(details);
+  }, [details]);
+
   return (
-    <ExpansionPanel expanded={expanded} onChange={handleChange}>
+    <ExpansionPanel
+      expanded={props.expanded === props.data.name}
+      onChange={props.setChange(props.data.name)}
+    >
       <ExpansionPanelSummary
         className={classes.root}
         expandIcon={<ExpandMoreIcon />}
@@ -55,7 +67,7 @@ const ExpansionItem = props => {
         <Typography className={classes.heading}>{props.data.label}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
-        <Typography>{props.data.value}</Typography>
+        <Typography variant="body2">{description}</Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

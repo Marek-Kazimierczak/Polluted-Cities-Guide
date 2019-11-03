@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import ExpansionItem from "./ExpansionItem";
@@ -12,22 +13,38 @@ const useStyles = makeStyles(theme => ({
 
 const Accordion = () => {
   const classes = useStyles();
+  const cities = useSelector(state => state.cities.cities);
+  const activeCountry = useSelector(state => state.cities.countryImage);
+  const [panels, setPanels] = useState(null);
+  const [expanded, setExpanded] = useState(false);
 
-  const randomText =
-    "There was a bit of a war on Material UI at my last job. It’s a heavy library that is (understandably) very opinionated, while Styled Components was a new found freedom. We could write regular CSS AND inject custom properties like any other React component?? Sign us up.";
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
-  const suggestions = [
-    { label: "Poland", value: randomText, image: "/assets/poland.svg" },
-    { label: "Germany", value: randomText, image: "/assets/germany.svg" },
-    { label: "Spain", value: randomText, image: "/assets/spain.svg" },
-    { label: "France", value: randomText, image: "/assets/france.svg" }
-  ];
+  useEffect(() => {
+    setPanels(cities);
+  }, [cities]);
 
-  const panels = suggestions.map((panel, index) => (
-    <ExpansionItem data={panel} key={index} />
-  ));
+  const items = !panels
+    ? null
+    : panels.map((panel, index) => {
+        const data = {
+          label: panel,
+          name: `panel${index + 1}`,
+          image: activeCountry
+        };
+        return (
+          <ExpansionItem
+            data={data}
+            key={index}
+            expanded={expanded}
+            setChange={handleChange}
+          />
+        );
+      });
 
-  return <Paper className={classes.root}>{panels}</Paper>;
+  return <Paper className={classes.root}>{items}</Paper>;
 };
 
 export default Accordion;

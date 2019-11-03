@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import { useSelector, useDispatch } from "react-redux";
 import { emphasize, makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   Avatar,
@@ -12,12 +13,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 
-const suggestions = [
-  { label: "Poland", value: "PL", image: "/assets/poland.svg" },
-  { label: "Germany", value: "DE", image: "/assets/germany.svg" },
-  { label: "Spain", value: "PL", image: "/assets/spain.svg" },
-  { label: "France", value: "PL", image: "/assets/france.svg" }
-];
+import { getCities } from "../../../actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -214,6 +210,7 @@ const SingleValue = props => {
   const classes = useStyles();
   return (
     <Chip
+      key={props.label}
       avatar={<Avatar alt={props.data.label} src={props.data.image} />}
       tabIndex={-1}
       label={props.children}
@@ -287,10 +284,13 @@ const components = {
 const CountrySelect = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const [single, setSingle] = React.useState(null);
+  const suggestions = useSelector(state => state.countries);
+  const dispatch = useDispatch();
+  const [value, setValue] = React.useState(null);
 
-  const handleChangeSingle = value => {
-    setSingle(value);
+  const handleChange = value => {
+    setValue(value);
+    dispatch(getCities(value));
   };
 
   const selectStyles = {
@@ -319,8 +319,8 @@ const CountrySelect = () => {
           placeholder="Choose a country"
           options={suggestions}
           components={components}
-          value={single}
-          onChange={handleChangeSingle}
+          value={value}
+          onChange={handleChange}
         />
         <div className={classes.divider} />
       </NoSsr>
