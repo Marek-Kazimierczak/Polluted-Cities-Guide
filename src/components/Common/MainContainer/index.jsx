@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Container, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: theme.spacing(4),
-    minHeight: "80vh"
+    marginTop: theme.spacing(4)
   },
   paper: {
     padding: theme.spacing(4),
