@@ -6,6 +6,10 @@ export const GET_ACTIVE_COUNTRY = "GET_ACTIVE_COUNTRY";
 export const GET_CITIES_SUCCESS = "GET_CITIES_SUCCESS";
 export const GET_CITIES_FAILED = "GET_CITIES_FAILED";
 
+export const LOADING_IMAGES = "LOADING_IMAGES";
+export const GET_IMAGES_SUCCESS = "GET_IMAGES_SUCCESS";
+export const GET_IMAGES_FAILED = "GET_IMAGES_FAILED";
+
 export const getCities = country => {
   return async function(dispatch) {
     dispatch({ type: LOADING_CITIES, payload: true });
@@ -25,12 +29,6 @@ export const getCities = country => {
     }
   };
 };
-
-// GET CITIES THUMBNAILS
-
-export const LOADING_IMAGES = "LOADING_IMAGES";
-export const GET_IMAGES_SUCCESS = "GET_IMAGES_SUCCESS";
-export const GET_IMAGES_FAILED = "GET_IMAGES_FAILED";
 
 export const getCitiesImages = cities => {
   return async function(dispatch) {

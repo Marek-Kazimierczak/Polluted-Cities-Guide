@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
+import {
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  Typography,
+  Avatar
+} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Avatar } from "@material-ui/core";
 import { cityDetails } from "../../../../actions";
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     flexBasis: "33.33%",
     flexShrink: 0
   },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary
+  },
   details: {
     backgroundColor: "#303030"
   },
@@ -35,14 +41,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ExpansionItem = props => {
+  const {
+    expanded,
+    setChange,
+    data: { label, name, image, measurements }
+  } = props;
   const classes = useStyles();
-  const [description, setDescription] = useState(null);
   const dispatch = useDispatch();
   const details = useSelector(state => state.cityDetails.details);
+  const loading = useSelector(state => state.cityDetails.loading);
+  const [description, setDescription] = useState(null);
 
   const handleClick = () => {
-    dispatch(cityDetails(props.data.label));
-    setDescription("");
+    dispatch(cityDetails(label));
   };
 
   useEffect(() => {
@@ -51,25 +62,26 @@ const ExpansionItem = props => {
 
   return (
     <ExpansionPanel
-      expanded={props.expanded === props.data.name}
-      onChange={props.setChange(props.data.name)}
+      expanded={expanded === name}
+      onChange={setChange(name)}
       onClick={() => handleClick()}
     >
       <ExpansionPanelSummary
         className={classes.root}
         expandIcon={<ExpandMoreIcon />}
-        aria-controls={`panel-${props.data.label}-content`}
-        id={`panel-${props.data.label}-header`}
+        aria-controls={`panel-${label}-content`}
+        id={`panel-${label}-header`}
       >
-        <Avatar
-          alt={props.data.label}
-          src={props.data.image}
-          className={classes.avatar}
-        />
-        <Typography className={classes.heading}>{props.data.label}</Typography>
+        <Avatar alt={label} src={image} className={classes.avatar} />
+        <Typography className={classes.heading}>{label}</Typography>
+        <Typography className={classes.secondaryHeading}>
+          {measurements.value} {measurements.unit}
+        </Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
-        <Typography variant="body2">{description}</Typography>
+        <Typography variant="body2">
+          {loading ? "loading..." : description}
+        </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

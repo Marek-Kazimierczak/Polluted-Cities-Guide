@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 const Accordion = () => {
   const classes = useStyles();
   const cities = useSelector(state => state.cities.cities);
+  const measurements = useSelector(state => state.cities.measurements);
   const thumbnails = useSelector(state => state.cities.images);
   const activeCountryImage = useSelector(state => state.cities.countryImage);
   const [panels, setPanels] = useState(null);
@@ -26,21 +27,21 @@ const Accordion = () => {
   };
 
   useEffect(() => {
-    setPanels(cities);
-  }, [cities]);
-  useEffect(() => {
     setImages(thumbnails);
-  }, [thumbnails]);
+    setPanels(cities);
+  }, [cities, thumbnails]);
 
-  const items =
+  const expansionPanels =
     panels &&
     images &&
     panels.map((panel, index) => {
       const data = {
         name: `panel${index + 1}`,
         label: cities[index],
-        image: images[index] !== null ? images[index] : activeCountryImage
+        image: images[index] !== null ? images[index] : activeCountryImage,
+        measurements: measurements[index]
       };
+
       return (
         <ExpansionItem
           data={data}
@@ -51,7 +52,7 @@ const Accordion = () => {
       );
     });
 
-  return <Paper className={classes.root}>{items}</Paper>;
+  return <Paper className={classes.root}>{expansionPanels}</Paper>;
 };
 
 export default Accordion;

@@ -36,7 +36,9 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden"
   },
   chip: {
-    margin: theme.spacing(0.5, 0.25)
+    margin: theme.spacing(0.5, 0.25),
+    width: "50%",
+    borderRadius: 0
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -109,13 +111,7 @@ const Control = props => {
 };
 
 Control.propTypes = {
-  /**
-   * Children to render.
-   */
   children: PropTypes.node,
-  /**
-   * The mouse down event and the innerRef to pass down to the controller element.
-   */
   innerProps: PropTypes.shape({
     onMouseDown: PropTypes.func.isRequired
   }).isRequired,
@@ -146,13 +142,7 @@ const Option = props => {
 };
 
 Option.propTypes = {
-  /**
-   * The children to be rendered.
-   */
   children: PropTypes.node,
-  /**
-   * props passed to the wrapping element for the group.
-   */
   innerProps: PropTypes.shape({
     id: PropTypes.string.isRequired,
     key: PropTypes.string.isRequired,
@@ -161,9 +151,6 @@ Option.propTypes = {
     onMouseOver: PropTypes.func.isRequired,
     tabIndex: PropTypes.number.isRequired
   }).isRequired,
-  /**
-   * Inner ref to DOM Node
-   */
   innerRef: PropTypes.oneOfType([
     PropTypes.oneOf([null]),
     PropTypes.func,
@@ -171,13 +158,7 @@ Option.propTypes = {
       current: PropTypes.any.isRequired
     })
   ]).isRequired,
-  /**
-   * Whether the option is focused.
-   */
   isFocused: PropTypes.bool.isRequired,
-  /**
-   * Whether the option is selected.
-   */
   isSelected: PropTypes.bool.isRequired
 };
 
@@ -195,13 +176,7 @@ const Placeholder = props => {
 };
 
 Placeholder.propTypes = {
-  /**
-   * The children to be rendered.
-   */
   children: PropTypes.node,
-  /**
-   * props passed to the wrapping element for the group.
-   */
   innerProps: PropTypes.object,
   selectProps: PropTypes.object.isRequired
 };
@@ -214,20 +189,14 @@ const SingleValue = props => {
       avatar={<Avatar alt={props.data.label} src={props.data.image} />}
       tabIndex={-1}
       label={props.children}
-      className="props.selectProps.classes.singleValue"
+      className={classes.chip}
       {...props.innerProps}
     />
   );
 };
 
 SingleValue.propTypes = {
-  /**
-   * The children to be rendered.
-   */
   children: PropTypes.node,
-  /**
-   * Props passed to the wrapping element for the group.
-   */
   innerProps: PropTypes.any.isRequired,
   selectProps: PropTypes.object.isRequired
 };
@@ -241,9 +210,6 @@ const ValueContainer = props => {
 };
 
 ValueContainer.propTypes = {
-  /**
-   * The children to be rendered.
-   */
   children: PropTypes.node,
   selectProps: PropTypes.object.isRequired
 };
@@ -261,13 +227,7 @@ const Menu = props => {
 };
 
 Menu.propTypes = {
-  /**
-   * The children to be rendered.
-   */
   children: PropTypes.element.isRequired,
-  /**
-   * Props to be passed to the menu wrapper.
-   */
   innerProps: PropTypes.object.isRequired,
   selectProps: PropTypes.object.isRequired
 };
@@ -292,7 +252,7 @@ const CountrySelect = () => {
     sessionStorage.getItem("initialValue") || "null"
   );
 
-  const [value, setValue] = React.useState(initialState);
+  const [value, setValue] = useState(initialState);
 
   const handleChange = value => {
     setValue(value);

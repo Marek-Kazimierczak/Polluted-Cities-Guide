@@ -1,13 +1,18 @@
 export async function fetchCities(country) {
   const parameter = "pm10";
+
   const fromDate = "2019-01-01";
+
   const limit = "100";
+
   const response = await fetch(
     `https://api.openaq.org/v1/measurements?country=${country}&parameter=${parameter}&sort=desc&order_by=value&date_from=${fromDate}&limit=${limit}`
   );
+
   const data = await response.json();
 
   const cities = await data.results;
+
   return cities;
 }
 
@@ -31,6 +36,7 @@ export async function getCityImage(city) {
   );
 
   const dataImage = await responseImage.json();
+
   const pageId = await Object.keys(dataImage.query.pages)[0];
 
   const image = (await dataImage.query.pages[pageId].hasOwnProperty(

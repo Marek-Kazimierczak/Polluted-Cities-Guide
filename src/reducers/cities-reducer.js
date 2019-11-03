@@ -14,6 +14,7 @@ import {
 const initialState = {
   cities: null,
   images: null,
+  measurements: null,
   countryName: null,
   countryIsoCode: null,
   countryImage: null,
@@ -46,9 +47,15 @@ export default function(state = initialState, action) {
     }
     case GET_CITIES_SUCCESS: {
       const cities = action.payload.map(object => object.city);
+      const measurements = action.payload.map(object => ({
+        parameter: object.parameter,
+        unit: object.unit,
+        value: object.value
+      }));
       return {
         ...state,
-        cities: cities,
+        cities,
+        measurements,
         loading: false
       };
     }

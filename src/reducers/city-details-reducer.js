@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
     case LOADING_DETAILS: {
       return {
         ...state,
-        details: "loading...",
+        details: null,
         activeCity: action.payload,
         error: null,
         loading: true
