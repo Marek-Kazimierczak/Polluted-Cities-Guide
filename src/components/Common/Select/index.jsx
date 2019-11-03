@@ -290,7 +290,7 @@ const CountrySelect = () => {
 
   const handleChange = value => {
     setValue(value);
-    dispatch(getCities(value.isoCode));
+    dispatch(getCities(value));
   };
 
   const selectStyles = {

@@ -36,26 +36,23 @@ const useStyles = makeStyles(theme => ({
 
 const ExpansionItem = props => {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
   const [description, setDescription] = useState(null);
   const dispatch = useDispatch();
   const details = useSelector(state => state.cityDetails.details);
 
   useEffect(() => {
-    console.log("IsExpanded: ", expanded);
-    expanded && dispatch(cityDetails(props.data.label));
-  }, [expanded]);
+    props.expanded && dispatch(cityDetails(props.data.label));
+  }, [props.expanded]);
 
   useEffect(() => {
     setDescription(details);
   }, [details]);
 
-  const handleChange = (event, isExpanded) => {
-    setExpanded(!expanded);
-  };
-
   return (
-    <ExpansionPanel expanded={expanded} onChange={handleChange}>
+    <ExpansionPanel
+      expanded={props.expanded === props.data.name}
+      onChange={props.setChange(props.data.name)}
+    >
       <ExpansionPanelSummary
         className={classes.root}
         expandIcon={<ExpandMoreIcon />}
@@ -70,8 +67,7 @@ const ExpansionItem = props => {
         <Typography className={classes.heading}>{props.data.label}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
-        {/* <Typography>{props.data.value}</Typography> */}
-        <div dangerouslySetInnerHTML={{ __html: description && description }} />
+        <Typography variant="body2">{description}</Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

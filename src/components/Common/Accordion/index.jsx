@@ -11,14 +11,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const randomText =
-  "There was a bit of a war on Material UI at my last job. It’s a heavy library that is (understandably) very opinionated, while Styled Components was a new found freedom. We could write regular CSS AND inject custom properties like any other React component?? Sign us up.";
-const image = "/assets/poland.svg";
-
 const Accordion = () => {
   const classes = useStyles();
   const cities = useSelector(state => state.cities.cities);
+  const activeCountry = useSelector(state => state.cities.countryImage);
   const [panels, setPanels] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   useEffect(() => {
     setPanels(cities);
@@ -27,8 +29,19 @@ const Accordion = () => {
   const items = !panels
     ? null
     : panels.map((panel, index) => {
-        const data = { label: panel, value: randomText, image };
-        return <ExpansionItem data={data} key={index} />;
+        const data = {
+          label: panel,
+          name: `panel${index + 1}`,
+          image: activeCountry
+        };
+        return (
+          <ExpansionItem
+            data={data}
+            key={index}
+            expanded={expanded}
+            setChange={handleChange}
+          />
+        );
       });
 
   return <Paper className={classes.root}>{items}</Paper>;
