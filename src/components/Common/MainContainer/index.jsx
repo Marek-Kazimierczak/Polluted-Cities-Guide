@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Paper } from "@material-ui/core";
 
@@ -37,10 +36,6 @@ const MainContainer = props => {
       </Paper>
     </Container>
   );
-};
-
-MainContainer.propTypes = {
-  children: PropTypes.node.isRequired
 };
 
 export default MainContainer;

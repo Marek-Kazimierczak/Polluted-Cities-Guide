@@ -88,7 +88,7 @@ const ExpansionItem = props => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
         <Typography className={classes.text} variant="body2">
-          {loading ? "loading..." : details}
+          {loading ? "Loading..." : details}
         </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>

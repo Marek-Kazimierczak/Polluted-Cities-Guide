@@ -130,7 +130,7 @@ Control.propTypes = {
     PropTypes.shape({
       current: PropTypes.any.isRequired
     })
-  ]).isRequired,
+  ]),
   selectProps: PropTypes.object.isRequired
 };
 
@@ -154,19 +154,19 @@ Option.propTypes = {
   children: PropTypes.node,
   innerProps: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    key: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onMouseMove: PropTypes.func.isRequired,
     onMouseOver: PropTypes.func.isRequired,
     tabIndex: PropTypes.number.isRequired
-  }).isRequired,
+  }),
   innerRef: PropTypes.oneOfType([
     PropTypes.oneOf([null]),
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any.isRequired
+      current: PropTypes.any
     })
-  ]).isRequired,
+  ]),
   isFocused: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired
 };
@@ -206,7 +206,7 @@ const SingleValue = props => {
 
 SingleValue.propTypes = {
   children: PropTypes.node,
-  innerProps: PropTypes.any.isRequired,
+  innerProps: PropTypes.any,
   selectProps: PropTypes.object.isRequired
 };
 

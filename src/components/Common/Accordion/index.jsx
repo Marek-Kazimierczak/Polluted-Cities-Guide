@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-
 import ExpansionItem from "./ExpansionItem";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     overflow: "hidden",
+    backgroundColor: "#383f48",
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "black"
     }
