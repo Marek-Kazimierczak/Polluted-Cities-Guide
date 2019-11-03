@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
@@ -286,12 +286,22 @@ const CountrySelect = () => {
   const theme = useTheme();
   const suggestions = useSelector(state => state.countries);
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(null);
+
+  const initialState = JSON.parse(
+    sessionStorage.getItem("initialValue") || "null"
+  );
+
+  const [value, setValue] = React.useState(initialState);
 
   const handleChange = value => {
     setValue(value);
+    sessionStorage.setItem("initialValue", JSON.stringify(value));
     dispatch(getCities(value));
   };
+
+  useEffect(() => {
+    value && dispatch(getCities(value));
+  }, []);
 
   const selectStyles = {
     input: base => ({
