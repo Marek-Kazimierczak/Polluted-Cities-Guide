@@ -13,7 +13,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 
-import { getCities } from "../../../actions";
+import { getCities, getCitiesImages } from "../../../actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -285,6 +285,7 @@ const CountrySelect = () => {
   const classes = useStyles();
   const theme = useTheme();
   const suggestions = useSelector(state => state.countries);
+  const cities = useSelector(state => state.cities.cities);
   const dispatch = useDispatch();
 
   const initialState = JSON.parse(
@@ -302,6 +303,10 @@ const CountrySelect = () => {
   useEffect(() => {
     value && dispatch(getCities(value));
   }, []);
+
+  useEffect(() => {
+    cities && dispatch(getCitiesImages(cities));
+  }, [cities]);
 
   const selectStyles = {
     input: base => ({

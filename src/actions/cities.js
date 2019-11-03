@@ -1,4 +1,4 @@
-import { fetchCities } from "../services/api";
+import { fetchCities, getCityImage } from "../services/api";
 import { getUniqueRecords } from "../helpers/getUniqueRecords";
 
 export const LOADING_CITIES = "LOADING_CITIES";
@@ -22,8 +22,32 @@ export const getCities = country => {
       });
     } catch (error) {
       dispatch({ type: GET_CITIES_FAILED, payload: error });
-    } finally {
-      dispatch({ type: LOADING_CITIES, payload: false });
+    }
+  };
+};
+
+// GET CITIES THUMBNAILS
+
+export const LOADING_IMAGES = "LOADING_IMAGES";
+export const GET_IMAGES_SUCCESS = "GET_IMAGES_SUCCESS";
+export const GET_IMAGES_FAILED = "GET_IMAGES_FAILED";
+
+export const getCitiesImages = cities => {
+  return async function(dispatch) {
+    dispatch({ type: LOADING_IMAGES, payload: true });
+
+    try {
+      const citiesImages = Promise.all(
+        cities.map(city => getCityImage(city))
+      ).then(images => {
+        dispatch({
+          type: GET_IMAGES_SUCCESS,
+          payload: images
+        });
+      });
+      return citiesImages;
+    } catch (error) {
+      dispatch({ type: GET_IMAGES_FAILED, payload: error });
     }
   };
 };

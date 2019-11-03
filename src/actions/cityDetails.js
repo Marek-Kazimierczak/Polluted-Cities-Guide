@@ -6,7 +6,7 @@ export const GET_DETAILS_FAILED = "GET_DETAILS_FAILED";
 
 export const cityDetails = city => {
   return async function(dispatch) {
-    dispatch({ type: "LOADING_DETAILS", payload: true });
+    dispatch({ type: "LOADING_DETAILS", payload: city });
 
     try {
       const details = await getCityDetails(city);
@@ -16,8 +16,6 @@ export const cityDetails = city => {
       });
     } catch (error) {
       dispatch({ type: "GET_DETAILS_FAILED", payload: error });
-    } finally {
-      dispatch({ type: "LOADING_DETAILS", payload: false });
     }
   };
 };

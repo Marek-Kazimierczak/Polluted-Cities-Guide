@@ -39,10 +39,12 @@ const ExpansionItem = props => {
   const [description, setDescription] = useState(null);
   const dispatch = useDispatch();
   const details = useSelector(state => state.cityDetails.details);
+  const activeCity = useSelector(state => state.cityDetails.activeCity);
 
-  useEffect(() => {
-    props.expanded && dispatch(cityDetails(props.data.label));
-  }, [props.expanded]);
+  const handleClick = () => {
+    dispatch(cityDetails(props.data.label));
+    setDescription("");
+  };
 
   useEffect(() => {
     setDescription(details);
@@ -52,6 +54,7 @@ const ExpansionItem = props => {
     <ExpansionPanel
       expanded={props.expanded === props.data.name}
       onChange={props.setChange(props.data.name)}
+      onClick={() => handleClick()}
     >
       <ExpansionPanelSummary
         className={classes.root}
