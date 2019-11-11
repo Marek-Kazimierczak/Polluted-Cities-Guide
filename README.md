@@ -12,6 +12,11 @@ The data is provided by **Open AQ Platform API** and **Wikipedia API**.
 
 The project is built with **React**, **Redux**, and **Material-UI library**.
 
+![Screenshot-1](https://user-images.githubusercontent.com/46679378/68588768-97fa9080-048a-11ea-8a44-d63b8ba508ab.png)
+
+![Screenshot-2](https://user-images.githubusercontent.com/46679378/68588810-b06aab00-048a-11ea-8fbf-31acf1ffd198.png)
+
+
 ## Installation and Setup Instructions
 
 You will need  `node`  and  `npm` or `yarn` installed globally on your machine.
