@@ -1,6 +1,6 @@
 import { dustParameter, startDate, resultsLimit } from "../config/apiParams";
 
-export async function fetchCities(country) {
+export async function fetchCities(country: string): Promise<any> {
   const response = await fetch(
     `https://api.openaq.org/v1/measurements?country=${country}&parameter=${dustParameter}&sort=desc&order_by=value&date_from=${startDate}&limit=${resultsLimit}`
   );
@@ -12,7 +12,7 @@ export async function fetchCities(country) {
   return cities;
 }
 
-export async function getCityDetails(city) {
+export async function getCityDetails(city: string): Promise<any> {
   const responseText = await fetch(
     `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&redirects&titles=${city}&limit=1&origin=*`
   );
@@ -26,7 +26,7 @@ export async function getCityDetails(city) {
   return text;
 }
 
-export async function getCityImage(city) {
+export async function getCityImage(city: string): Promise<any> {
   const responseImage = await fetch(
     `https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=thumbnail&titles=${city}&origin=*`
   );

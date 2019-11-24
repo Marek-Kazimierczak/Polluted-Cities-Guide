@@ -1,17 +1,19 @@
 import {
   LOADING_DETAILS,
   GET_DETAILS_SUCCESS,
-  GET_DETAILS_FAILED
-} from "../actions";
+  GET_DETAILS_FAILED,
+  CityDetailsActionTypes,
+  CityDetailsReducer
+} from "../types";
 
-const initialState = {
+const initialState: CityDetailsReducer = {
   details: null,
   activeCity: null,
   error: null,
   loading: false
 };
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: CityDetailsActionTypes) {
   switch (action.type) {
     case LOADING_DETAILS: {
       return {
