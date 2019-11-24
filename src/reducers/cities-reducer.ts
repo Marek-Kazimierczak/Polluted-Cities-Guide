@@ -11,9 +11,9 @@ import {
 } from "../types";
 
 const initialState: CitiesState = {
-  cities: null,
-  images: null,
-  measurements: null,
+  cities: [],
+  images: [],
+  measurements: [],
   countryName: null,
   countryIsoCode: null,
   countryImage: null,
@@ -24,16 +24,16 @@ const initialState: CitiesState = {
 export default function(state = initialState, action: CitiesActionTypes) {
   switch (action.type) {
     case LOADING_IMAGES: {
-      return { ...state, error: null, loading: true, images: null };
+      return { ...state, error: null, loading: true, images: [] };
     }
     case GET_IMAGES_SUCCESS: {
       return { ...state, loading: false, images: action.payload };
     }
     case GET_IMAGES_FAILED: {
-      return { ...state, error: action.payload, loading: false, images: null };
+      return { ...state, error: action.payload, loading: false, images: [] };
     }
     case LOADING_CITIES: {
-      return { ...state, error: null, loading: true, cities: null };
+      return { ...state, error: null, loading: true, cities: [] };
     }
     case GET_ACTIVE_COUNTRY: {
       const { label, isoCode, image } = action.payload;

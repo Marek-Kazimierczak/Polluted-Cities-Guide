@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { cityDetails } from "../../../../actions";
+import { AppState } from "../../../../reducers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,17 +49,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ExpansionItem = props => {
+interface Props {
+  index: number;
+  expanded: string | false;
+  setChange: (
+    panel: string
+  ) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => void;
+}
+
+const ExpansionItem = (props: Props) => {
   const { expanded, setChange, index } = props;
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.cityDetails.loading);
-  const label = useSelector(state => state.cities.cities[index]);
-  const thumbnails = useSelector(state => state.cities.images);
-  const details = useSelector(state => state.cityDetails.details);
-  const activeCountryImage = useSelector(state => state.cities.countryImage);
-  const measurements = useSelector(state => state.cities.measurements[index]);
+
+  const {
+    cityDetails: { loading, details },
+    cities: {
+      countryImage: activeCountryImage,
+      images: thumbnails,
+      cities,
+      measurements
+    }
+  } = useSelector((state: AppState) => state);
+
+  const label = cities[index];
+  const measurement = measurements[index];
 
   const name = `panel${index + 1}`;
   const image =
@@ -80,11 +96,13 @@ const ExpansionItem = props => {
         aria-controls={`panel-${label}-content`}
         id={`panel-${label}-header`}
       >
-        <Avatar alt={label} src={image} className={classes.avatar} />
+        {image && <Avatar alt={label} src={image} className={classes.avatar} />}
         <Typography className={classes.heading}>{label}</Typography>
-        <Typography className={classes.subHeading}>
-          {measurements.value} {measurements.unit}
-        </Typography>
+        {measurement && (
+          <Typography className={classes.subHeading}>
+            {measurement.value} {measurement.unit}
+          </Typography>
+        )}
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.details}>
         <Typography className={classes.text} variant="body2">

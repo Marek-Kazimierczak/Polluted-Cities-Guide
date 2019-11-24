@@ -11,9 +11,10 @@ import {
   GET_IMAGES_SUCCESS,
   GET_IMAGES_FAILED
 } from "../types";
+import { Country } from "../config/countries";
 
 export const getCities = (
-  country: any
+  country: Country
 ): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async function(
     dispatch: ThunkDispatch<{}, {}, AnyAction>
@@ -37,7 +38,7 @@ export const getCities = (
 };
 
 export const getCitiesImages = (
-  cities: any
+  cities: string[]
 ): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async function(
     dispatch: ThunkDispatch<{}, {}, AnyAction>
@@ -46,7 +47,7 @@ export const getCitiesImages = (
 
     try {
       const citiesImages = Promise.all(
-        cities.map((city: any) => getCityImage(city))
+        cities.map((city: string) => getCityImage(city))
       ).then(images => {
         dispatch({
           type: GET_IMAGES_SUCCESS,

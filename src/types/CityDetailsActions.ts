@@ -4,15 +4,15 @@ export const GET_DETAILS_FAILED = "GET_DETAILS_FAILED";
 
 interface LoadingCityDetailsAction {
   type: typeof LOADING_DETAILS;
-  payload: boolean;
+  payload: string;
 }
 interface GetCityDetailsSuccessAction {
   type: typeof GET_DETAILS_SUCCESS;
-  payload: boolean;
+  payload: string;
 }
 interface GetCityDetailsFailedAction {
   type: typeof GET_DETAILS_FAILED;
-  payload: boolean;
+  payload: any;
 }
 
 export type CityDetailsActionTypes =

@@ -1,10 +1,10 @@
 export interface CitiesState {
-  cities: null | any;
-  images: null | any;
-  measurements: null | any;
-  countryName: null | string;
-  countryIsoCode: null | any;
-  countryImage: null | any;
+  cities: string[];
+  images: (string | null)[];
+  measurements: ({ parameter: string; unit: string; value: number } | null)[];
+  countryName: string | null;
+  countryIsoCode: string | null;
+  countryImage: string | null;
   error: null | any;
   loading: boolean;
 }

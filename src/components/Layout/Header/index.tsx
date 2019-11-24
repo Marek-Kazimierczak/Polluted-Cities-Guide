@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 const Header = () => {
   const classes = useStyles();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
   };
 

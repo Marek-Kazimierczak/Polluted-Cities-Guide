@@ -8,7 +8,7 @@ import {
 } from "../types";
 
 export const cityDetails = (
-  city: any
+  city: string
 ): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async function(
     dispatch: ThunkDispatch<{}, {}, AnyAction>

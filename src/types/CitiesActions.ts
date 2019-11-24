@@ -1,3 +1,4 @@
+import { Country } from "./../config/countries";
 export const LOADING_CITIES = "LOADING_CITIES";
 export const GET_ACTIVE_COUNTRY = "GET_ACTIVE_COUNTRY";
 export const GET_CITIES_SUCCESS = "GET_CITIES_SUCCESS";
@@ -14,12 +15,12 @@ interface LoadingCitiesAction {
 
 interface GetActiveCountryAction {
   type: typeof GET_ACTIVE_COUNTRY;
-  payload: any;
+  payload: Country;
 }
 
 interface getCitySuccessAction {
   type: typeof GET_CITIES_SUCCESS;
-  payload: any;
+  payload: any[];
 }
 
 interface GetCitiesFailedAction {
@@ -34,7 +35,7 @@ interface LaodingImagesAction {
 
 interface GetImagesSuccessAction {
   type: typeof GET_IMAGES_SUCCESS;
-  payload: any;
+  payload: (string | null)[];
 }
 
 interface GetImagesFailedAction {

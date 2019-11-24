@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, CSSProperties } from "react";
 import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
+import { ControlProps } from "react-select/src/components/Control";
 import { emphasize, makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   Avatar,
@@ -14,6 +14,17 @@ import {
 } from "@material-ui/core";
 import { countries } from "../../../config/countries";
 import { getCities, getCitiesImages } from "../../../actions";
+import { AppState } from "../../../reducers";
+import {
+  InputComponent,
+  OptionType,
+  IOption,
+  IPlaceholder,
+  ISingleValue,
+  IValueContainer,
+  IMenu,
+  IComponents
+} from "../../../types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,20 +96,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const inputComponent = ({ inputRef, ...props }) => {
+const inputComponent = ({ inputRef, ...props }: InputComponent) => {
   return <div ref={inputRef} {...props} />;
 };
 
-inputComponent.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired
-    })
-  ])
-};
-
-const Control = props => {
+const Control = (props: ControlProps<OptionType>) => {
   const {
     children,
     innerProps,
@@ -123,22 +125,7 @@ const Control = props => {
   );
 };
 
-Control.propTypes = {
-  children: PropTypes.node,
-  innerProps: PropTypes.shape({
-    onMouseDown: PropTypes.func.isRequired
-  }).isRequired,
-  innerRef: PropTypes.oneOfType([
-    PropTypes.oneOf([null]),
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any.isRequired
-    })
-  ]),
-  selectProps: PropTypes.object.isRequired
-};
-
-const Option = props => {
+const Option = (props: IOption) => {
   return (
     <MenuItem
       ref={props.innerRef}
@@ -154,28 +141,7 @@ const Option = props => {
   );
 };
 
-Option.propTypes = {
-  children: PropTypes.node,
-  innerProps: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    key: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    onMouseMove: PropTypes.func.isRequired,
-    onMouseOver: PropTypes.func.isRequired,
-    tabIndex: PropTypes.number.isRequired
-  }),
-  innerRef: PropTypes.oneOfType([
-    PropTypes.oneOf([null]),
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any
-    })
-  ]),
-  isFocused: PropTypes.bool.isRequired,
-  isSelected: PropTypes.bool.isRequired
-};
-
-const Placeholder = props => {
+const Placeholder = (props: IPlaceholder) => {
   const { selectProps, innerProps = {}, children } = props;
   return (
     <Typography
@@ -188,13 +154,7 @@ const Placeholder = props => {
   );
 };
 
-Placeholder.propTypes = {
-  children: PropTypes.node,
-  innerProps: PropTypes.object,
-  selectProps: PropTypes.object.isRequired
-};
-
-const SingleValue = props => {
+const SingleValue = (props: ISingleValue) => {
   const classes = useStyles();
   return (
     <Chip
@@ -214,13 +174,7 @@ const SingleValue = props => {
   );
 };
 
-SingleValue.propTypes = {
-  children: PropTypes.node,
-  innerProps: PropTypes.any,
-  selectProps: PropTypes.object.isRequired
-};
-
-const ValueContainer = props => {
+const ValueContainer = (props: IValueContainer) => {
   return (
     <div className={props.selectProps.classes.valueContainer}>
       {props.children}
@@ -228,12 +182,7 @@ const ValueContainer = props => {
   );
 };
 
-ValueContainer.propTypes = {
-  children: PropTypes.node,
-  selectProps: PropTypes.object.isRequired
-};
-
-const Menu = props => {
+const Menu = (props: IMenu) => {
   return (
     <Paper
       square
@@ -245,13 +194,7 @@ const Menu = props => {
   );
 };
 
-Menu.propTypes = {
-  children: PropTypes.element.isRequired,
-  innerProps: PropTypes.object.isRequired,
-  selectProps: PropTypes.object.isRequired
-};
-
-const components = {
+const components: IComponents = {
   Control,
   Menu,
   Option,
@@ -264,7 +207,7 @@ const CountrySelect = () => {
   const classes = useStyles();
   const theme = useTheme();
   const suggestions = countries;
-  const cities = useSelector(state => state.cities.cities);
+  const cities = useSelector((state: AppState) => state.cities.cities);
   const dispatch = useDispatch();
 
   const initialState = JSON.parse(
@@ -273,7 +216,7 @@ const CountrySelect = () => {
 
   const [value, setValue] = useState(initialState);
 
-  const handleChange = value => {
+  const handleChange = (value: any) => {
     setValue(value);
     sessionStorage.setItem("initialValue", JSON.stringify(value));
     dispatch(getCities(value));
@@ -288,7 +231,7 @@ const CountrySelect = () => {
   }, [cities, dispatch]);
 
   const selectStyles = {
-    input: base => ({
+    input: (base: CSSProperties) => ({
       ...base,
       color: theme.palette.text.primary,
       "& input": {

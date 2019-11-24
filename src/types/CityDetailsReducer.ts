@@ -1,6 +1,6 @@
 export interface CityDetailsReducer {
-  details: null | any;
-  activeCity: null | any;
-  error: null | any;
+  details: string | null;
+  activeCity: string | null;
+  error: any;
   loading: boolean;
 }
