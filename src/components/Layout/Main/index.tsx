@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Accordion from "../../Common/Accordion";
 import MainContainer from "../../Common/MainContainer";
+import { AppState } from "../../../reducers";
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -13,14 +14,14 @@ const useStyles = makeStyles(theme => ({
 
 const Main = () => {
   const classes = useStyles();
-  const loading = useSelector(state => state.cities.loading);
-  const cities = useSelector(state => state.cities.cities);
-  const thumbnails = useSelector(state => state.cities.images);
+  const { loading, cities, images: thumbnails } = useSelector(
+    (state: AppState) => state.cities
+  );
 
   return (
     <main>
       <MainContainer>
-        {!cities || !thumbnails ? (
+        {!cities.length || !thumbnails.length ? (
           <Typography
             align="center"
             display="block"

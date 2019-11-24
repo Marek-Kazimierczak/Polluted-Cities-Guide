@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import ExpansionItem from "./ExpansionItem";
+import { AppState } from "../../../reducers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,14 +18,17 @@ const useStyles = makeStyles(theme => ({
 
 const Accordion = () => {
   const classes = useStyles();
-  const cities = useSelector(state => state.cities.cities);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<string | false>(false);
+  const cities = useSelector((state: AppState) => state.cities.cities);
 
-  const handleChange = panel => (event, isExpanded) => {
+  const handleChange = (panel: string) => (
+    event: React.ChangeEvent<{}>,
+    isExpanded: boolean
+  ) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const expansionPanels = cities.map((panel, index) => (
+  const expansionPanels = (cities as any).map((panel: any, index: number) => (
     <ExpansionItem
       index={index}
       key={index}

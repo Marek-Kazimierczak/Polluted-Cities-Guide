@@ -27,7 +27,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MainContainer = props => {
+interface Props {
+  children: React.ReactNode;
+  header?: boolean;
+}
+
+const MainContainer = (props: Props) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
