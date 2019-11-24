@@ -10,7 +10,7 @@ This is the guide that shows the 10 most polluted cities of France, Germany, Pol
 
 The data is provided by **Open AQ Platform API** and **Wikipedia API**.
 
-The project is built with **React**, **Redux**, and **Material-UI library**.
+The project is built with **React**, **Redux**, **TypeScript** and **Material-UI library**.
 
 ![Screenshot-1](https://user-images.githubusercontent.com/46679378/68588768-97fa9080-048a-11ea-8a44-d63b8ba508ab.png)
 
