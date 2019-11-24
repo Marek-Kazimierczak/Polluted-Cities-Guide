@@ -9,6 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./views/App";
 import reducer from "./reducers";
 import * as serviceWorker from "./serviceWorker";
+import "./index.css";
 
 const createStoreWithMiddleware = composeWithDevTools(
   applyMiddleware(reduxThunk)

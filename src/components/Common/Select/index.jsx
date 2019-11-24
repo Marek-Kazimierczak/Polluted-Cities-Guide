@@ -12,7 +12,7 @@ import {
   Chip,
   MenuItem
 } from "@material-ui/core";
-
+import { countries } from "../../../config/countries";
 import { getCities, getCitiesImages } from "../../../actions";
 
 const useStyles = makeStyles(theme => ({
@@ -263,7 +263,7 @@ const components = {
 const CountrySelect = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const suggestions = useSelector(state => state.countries);
+  const suggestions = countries;
   const cities = useSelector(state => state.cities.cities);
   const dispatch = useDispatch();
 

@@ -3,7 +3,6 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Header from "../components/Layout/Header";
 import Main from "../components/Layout/Main";
 import Footer from "../components/Layout/Footer";
-import "./App.css";
 
 const theme = createMuiTheme({
   palette: {
